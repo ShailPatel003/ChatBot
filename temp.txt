@@ -1,0 +1,61 @@
+this.messages.slice().reverse().forEach(function (item)
+      {
+        if (item.name === "SDF")
+        {
+
+          if(Array.isArray(item.message)) {
+              let allOptions = item.message;
+
+            html += '<div class="click_btn_boxes">';
+            html += '<div class="messages__item messages__item--visitor">' +
+                'Choose appropriate option' +
+            "</div>";
+
+            console.log(allOptions);
+            for(let i=1;i<allOptions.length;i++) {
+                html += '<button class="click_btn " onclick=chatbox.clickBtnHandleMessage(chatbox,"' +  allOptions[0]  + '",' + i + ') ><span class="click_btn_text">' + allOptions[i] + '</span></button>'
+            }
+//                 console.log(allOptions);
+                let rowCount = Math.ceil(parseFloat((allOptions.length - 1)/2));
+//                console.log(rowCount);
+                let colCount = 0;
+                for(let i=0;i<rowCount;i++) {
+//                console.log("Value of i",i);
+                    colCount++;
+                    html += '<div class="click_btn_row">';
+                    html += '<button class="click_btn "onclick=chatbox.clickBtnHandleMessage(chatbox,"' +  allOptions[0]  + '",' + colCount + ') ><span class="click_btn_text">' + allOptions[colCount] + '</span></button>'
+                    colCount++;
+                    if(allOptions[colCount]){
+                    html += '<button class="click_btn "onclick=chatbox.clickBtnHandleMessage(chatbox,"' +  allOptions[0]  + '",' + colCount + ') ><span class="click_btn_text">' + allOptions[colCount] + '</span></button>'
+                    }
+                    html += '</div>'
+            }
+            html += '</div>';
+
+
+          }
+          else {
+              html +=
+                '<div class="messages__item messages__item--visitor">' +
+                item.message +
+                "</div>";
+          }
+
+        });
+
+        else
+        {
+          html +=
+            '<div class="messages__item messages__item--operator">' +
+            item.message +
+            "</div>";
+        }
+
+
+
+
+        //text response
+        const chatmessage = chatbox.querySelector('.chatbox__messages');
+        chatmessage.innerHTML = html;
+
+  }
